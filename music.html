@@ -71,6 +71,22 @@
   .rep-list li { font-size: 0.85rem; color: var(--ink-muted); line-height: 1.4; }
   .rep-list li strong { color: var(--ink); font-weight: 500; }
 
+  /* VIDEO */
+  .video-block { max-width: 760px; }
+  .video-wrap {
+    position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
+    border-radius: 1rem; background: var(--ink);
+    box-shadow: 0 4px 24px rgba(90,122,94,0.10);
+  }
+  .video-wrap iframe {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%; border: none; border-radius: 1rem;
+  }
+  .video-caption {
+    margin-top: 0.85rem; font-size: 0.85rem; color: var(--ink-faint);
+    line-height: 1.5;
+  }
+
   /* INSTRUCTORS */
   .instructors-list { display: flex; flex-direction: column; gap: 0.6rem; }
   .instructor-row { display: flex; gap: 1rem; align-items: baseline; font-size: 0.9rem; }
@@ -270,6 +286,23 @@
 -->
 
 
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section class="content-section">
+  <p class="section-label">Watch</p>
+  <div class="video-block">
+    <div class="video-wrap">
+      <iframe
+        src="https://www.youtube.com/embed/2t02UOtZdPc"
+        title="San Francisco Symphony Youth Orchestra: Berlioz Symphonie Fantastique in Rehearsal"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <p class="video-caption">San Francisco Symphony Youth Orchestra — Berlioz <em>Symphonie Fantastique</em> in Rehearsal</p>
   </div>
 </section>
 
