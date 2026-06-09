@@ -112,15 +112,16 @@
   <p class="section-label">Overview</p>
   <p class="class="section-title">The Project</p>
   <p class="body-text">
-    Northwestern Formula Racing's Data Acquisition subteam is responsible for collecting and visualizing
-    real-time telemetry from the race car during testing and competition. As a member of the DAQ subteam,
-    I've worked on both the software and hardware sides — contributing to the dashboard display system
-    and designing a revised PCB for the dashboard controller.
+    Northwestern Formula Racing's Data Acquisition subteam develops the systems responsible for collecting,
+    transmitting, and visualizing vehicle telemetry. For NFR26, the team is redesigning the race car's
+    dashboard system, which provides drivers with real-time information about vehicle state, battery health,
+    braking, steering, and system faults during operation.
   </p>
+
   <p class="body-text">
-    The dashboard system gives the driver and engineers immediate feedback on vehicle state, including
-    speed, temperatures, and system health. Visual indicators like NeoPixel LEDs provide at-a-glance
-    status information even in bright outdoor conditions.
+    My work focuses on both the hardware and software behind the dashboard. I've contributed to the redesign
+    and validation of the dashboard controller hardware, assembled and brought up multiple PCB revisions,
+    and developed software features for driver feedback, telemetry visualization, and CAN network debugging.
   </p>
 </div>
 
@@ -150,11 +151,13 @@
     the display, and driving the LED indicators based on vehicle state.
   </p>
   <ul class="detail-list">
-    <li>Developed features for a C++-based dashboard system to display real-time vehicle telemetry</li>
-    <li>Designed and tested NeoPixel LED drivers for visual status indicators on the car</li>
-    <li>Collaborated across subteams using Git-based workflows and code review</li>
-    <li>Participated in testing sessions to validate behavior under real operating conditions</li>
-  </ul>
+    <li>Validated and brought up dashboard controller hardware, including CAN interfaces, displays, and driver I/O peripherals</li>
+    <li>Assembled and tested multiple dashboard controller PCB revisions prior to vehicle integration</li>
+    <li>Developed NeoPixel drivers and animations for driver feedback and vehicle status indication</li>
+    <li>Implemented dashboard debugging and telemetry screens for vehicle data visualization</li>
+    <li>Maintained and updated CAN communication software as DBC definitions evolved throughout the season</li>
+    <li>Created Python tools to streamline testing, debugging, and development workflows</li>
+</ul>
 </div>
 
 <div class="content-section" style="border-bottom:none;">
@@ -169,8 +172,10 @@
       <div class="highlight-label">Firmware language for dashboard and LED driver systems</div>
     </div>
     <div class="highlight-card">
-      <div class="highlight-num">🔒</div>
-      <div class="highlight-label">Private team repository — code not publicly available</div>
+      <a href="https://github.com/NU-Formula-Racing/daq-dash-26" target="_blank" style="text-decoration:none; color:inherit; display:block;">
+      <div class="highlight-num" style="font-size:1.3rem;">GitHub</div>
+      <div class="highlight-label" style="color:var(--sage);">NU-Formula-Racing/daq-dash-26 ↗</div>
+      </a>
     </div>
   </div>
 </div>
