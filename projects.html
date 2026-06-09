@@ -48,8 +48,6 @@
     display: flex;
     flex-direction: column;
     transition: box-shadow 0.2s, transform 0.2s;
-    text-decoration: none;
-    color: inherit;
     cursor: pointer;
   }
   .project-card:hover { box-shadow: 0 8px 32px rgba(90,122,94,0.12); transform: translateY(-2px); }
@@ -59,7 +57,7 @@
     margin-top: 0.75rem; opacity: 0; transition: opacity 0.2s;
   }
   .project-card:hover .card-hover-cta { opacity: 1; }
-  .project-card.featured { grid-column: span 2; display: grid !important; grid-template-columns: 1fr 1fr; }
+  .project-card.featured { grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr; }
   .card-visual {
     aspect-ratio: 16/9;
     background: linear-gradient(135deg, var(--bg-card), var(--sage-pale));
@@ -146,7 +144,7 @@
 <div class="projects-grid">
 
   <!-- FORMULA SAE — FEATURED -->
-  <a href="project-formula.html" class="project-card featured">
+  <div class="project-card featured" onclick="window.location='project-formula.html'">
     <div class="card-visual">
       <img src="formula.jpg" alt="Northwestern Formula SAE">
     </div>
@@ -176,10 +174,10 @@
         <span class="card-hover-cta">View project →</span>
       </div>
     </div>
-  </a>
+  </div>
 
   <!-- WIRELESS FLUORIMETER -->
-  <a href="project-fluorimeter.html" class="project-card">
+  <div class="project-card" onclick="window.location='project-fluorimeter.html'">
     <div class="card-visual">
       <img src="fluorimeter.jpg" alt="Wireless Fluorimeter">
     </div>
@@ -209,10 +207,10 @@
         <span class="card-hover-cta">View project →</span>
       </div>
     </div>
-  </a>
+  </div>
 
   <!-- FIRST ROBOTICS -->
-  <a href="project-robotics.html" class="project-card">
+  <div class="project-card" onclick="window.location='project-robotics.html'">
     <div class="card-visual">
       <img src="robotics.jpg" alt="FIRST Robotics Team 1868">
     </div>
@@ -241,10 +239,10 @@
         <span class="card-hover-cta">View project →</span>
       </div>
     </div>
-  </a>
+  </div>
 
   <!-- RESONANCE -->
-  <a href="project-resonance.html" class="project-card">
+  <div class="project-card" onclick="window.location='project-resonance.html'">
     <div class="card-visual" style="background: linear-gradient(135deg, #2b2438 0%, #4a3b63 100%); font-size: 3rem;">
       🎻
       <span class="placeholder-label">Add photo → resonance.jpg</span>
@@ -274,10 +272,10 @@
         <span class="card-hover-cta">View project →</span>
       </div>
     </div>
-  </a>
+  </div>
 
   <!-- SPICALIGN -->
-  <a href="project-spicalign.html" class="project-card">
+  <div class="project-card" onclick="window.location='project-spicalign.html'">
     <div class="card-visual" style="background: linear-gradient(135deg, #2a1e3a 0%, #3d2952 100%); font-size: 3rem;">
       🏥
       <span class="placeholder-label">Add photo → spicalign.jpg</span>
@@ -307,7 +305,7 @@
         <span class="card-hover-cta">View project →</span>
       </div>
     </div>
-  </a>
+  </div>
 
   <!-- PLACEHOLDER -->
   <div class="project-card placeholder-card">
