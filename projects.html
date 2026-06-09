@@ -59,9 +59,7 @@
     margin-top: 0.75rem; opacity: 0; transition: opacity 0.2s;
   }
   .project-card:hover .card-hover-cta { opacity: 1; }
-  a.project-card { display: flex; }
-  a.project-card.featured { display: grid; }
-  .project-card.featured { grid-column: span 2; grid-template-columns: 1fr 1fr; }
+  .project-card.featured { grid-column: span 2; display: grid !important; grid-template-columns: 1fr 1fr; }
   .card-visual {
     aspect-ratio: 16/9;
     background: linear-gradient(135deg, var(--bg-card), var(--sage-pale));
