@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIRST Robotics — Sophia Bian</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#f2f5f0; --bg-card:#e8ede5; --sage:#5a7a5e; --sage-mid:#7a9e7e;
+    --sage-light:#aec5b0; --sage-pale:#d4e2d6; --ink:#1c2b1e;
+    --ink-muted:#5a6b5c; --ink-faint:#94a896; --white:#fafcf9;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--ink); font-family:'DM Sans',sans-serif; font-size:16px; line-height:1.6; }
+
+  nav { position:sticky; top:0; z-index:100; background:var(--bg); display:flex; justify-content:space-between; align-items:center; padding:1.4rem 5vw; border-bottom:1px solid var(--sage-pale); }
+  .nav-logo { font-family:'DM Serif Display',serif; font-size:1.1rem; color:var(--ink); text-decoration:none; }
+  nav ul { list-style:none; display:flex; gap:1.5rem; align-items:center; }
+  nav ul a { color:var(--ink-muted); text-decoration:none; font-size:0.88rem; font-weight:500; transition:color 0.2s; }
+  nav ul a:hover, nav ul a.active { color:var(--sage); }
+  .nav-cta { background:var(--sage) !important; color:var(--white) !important; padding:0.55rem 1.4rem; border-radius:2rem; font-weight:600 !important; }
+  .nav-cta:hover { background:var(--ink) !important; }
+
+  .project-hero { padding:5rem 5vw 0; border-bottom:1px solid var(--sage-pale); }
+  .back-link { display:inline-flex; align-items:center; gap:0.4rem; font-size:0.82rem; font-weight:600; color:var(--ink-faint); text-decoration:none; margin-bottom:2rem; transition:color 0.2s; }
+  .back-link:hover { color:var(--sage); }
+  .hero-meta { display:flex; align-items:center; gap:1rem; margin-bottom:1.2rem; flex-wrap:wrap; }
+  .hero-year { font-size:0.78rem; color:var(--ink-faint); font-weight:600; }
+  .status-badge { font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:0.3rem 0.8rem; border-radius:2rem; border:1.5px solid var(--ink-faint); color:var(--ink-faint); }
+  .project-hero h1 { font-family:'DM Serif Display',serif; font-size:clamp(2.4rem,5vw,4rem); font-weight:400; line-height:1.1; margin-bottom:1.2rem; }
+  .project-hero h1 em { font-style:italic; color:var(--sage); }
+  .hero-desc { font-size:1.05rem; color:var(--ink-muted); line-height:1.8; max-width:640px; margin-bottom:1.8rem; }
+  .tag-row { display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:3rem; }
+  .tag { font-size:0.78rem; font-weight:600; padding:0.35rem 0.9rem; border-radius:2rem; border:1.5px solid var(--sage-light); color:var(--sage); }
+  .hero-photo { width:100%; max-height:520px; object-fit:cover; object-position:center; display:block; border-radius:1rem 1rem 0 0; }
+
+  .content-section { padding:4rem 5vw; border-bottom:1px solid var(--sage-pale); max-width:900px; }
+  .section-label { font-size:0.72rem; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:1.5rem; }
+  .section-title { font-family:'DM Serif Display',serif; font-size:1.8rem; font-weight:400; margin-bottom:1rem; }
+  .body-text { font-size:0.97rem; color:var(--ink-muted); line-height:1.85; margin-bottom:1rem; }
+
+  .comp-table { width:100%; border-collapse:collapse; margin-top:1rem; }
+  .comp-table th { font-size:0.72rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--ink-faint); padding:0.6rem 1rem; text-align:left; border-bottom:1px solid var(--sage-pale); }
+  .comp-table td { font-size:0.88rem; color:var(--ink-muted); padding:0.9rem 1rem; border-bottom:1px solid var(--bg-card); vertical-align:top; }
+  .comp-table td:first-child { font-weight:600; color:var(--ink); font-size:0.9rem; }
+
+  .highlights { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:1.5rem; }
+  .highlight-card { background:var(--white); border:1px solid var(--sage-pale); border-radius:1rem; padding:1.5rem; }
+  .highlight-num { font-family:'DM Serif Display',serif; font-size:2rem; color:var(--sage); margin-bottom:0.25rem; }
+  .highlight-label { font-size:0.82rem; color:var(--ink-muted); }
+
+  .detail-list { list-style:none; display:flex; flex-direction:column; gap:0.6rem; margin-top:0.5rem; }
+  .detail-list li { font-size:0.92rem; color:var(--ink-muted); padding-left:1.3rem; position:relative; line-height:1.6; }
+  .detail-list li::before { content:'—'; position:absolute; left:0; color:var(--sage-light); }
+
+  footer { background:var(--ink); border-top:1px solid rgba(255,255,255,0.06); padding:1.5rem 5vw; display:flex; justify-content:space-between; align-items:center; font-size:0.78rem; color:var(--ink-faint); }
+  footer a { color:var(--ink-faint); text-decoration:none; }
+  footer a:hover { color:var(--sage-light); }
+
+  @media (max-width:768px) {
+    .highlights { grid-template-columns:1fr 1fr; }
+    nav ul li:not(:last-child) { display:none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Sophia Bian</a>
+  <ul>
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html" class="active">Projects</a></li>
+    <li><a href="music.html">Music</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="resume.html">Resume</a></li>
+    <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="project-hero">
+  <a href="projects.html" class="back-link">← Back to all projects</a>
+  <div class="hero-meta">
+    <span class="hero-year">Aug 2022 – Feb 2025</span>
+    <span class="status-badge">Completed</span>
+  </div>
+  <h1>FIRST Robotics<br><em>Team #1868</em></h1>
+  <p class="hero-desc">
+    Led the electrical subteam for a competitive FIRST Robotics team based at NASA Ames Research Center —
+    designing and building full robot systems from scratch each season on an 8-week build cycle.
+  </p>
+  <div class="tag-row">
+    <span class="tag">Electrical Systems</span>
+    <span class="tag">CAD</span>
+    <span class="tag">Fabrication</span>
+    <span class="tag">SOLIDWORKS</span>
+    <span class="tag">Team Leadership</span>
+  </div>
+  <img src="robotics.jpg" alt="FIRST Robotics Team 1868" class="hero-photo"
+       onerror="this.style.display='none'">
+</div>
+
+<div class="content-section">
+  <p class="section-label">Overview</p>
+  <p class="section-title">The Team</p>
+  <p class="body-text">
+    FIRST Robotics Competition (FRC) Team #1868, Space Cookies, is based at NASA Ames Research Center
+    in Mountain View, CA. Each season, teams have 8 weeks to design, build, and program a robot to
+    compete in a new game revealed each January.
+  </p>
+  <p class="body-text">
+    Over three years, I grew from a member on the electrical and mechanical subteams to leading
+    the electrical subteam — responsible for the robot's entire wiring architecture, power distribution,
+    and sensor integration. The team qualified to the FIRST World Championships twice during my time.
+  </p>
+</div>
+
+<div class="content-section">
+  <p class="section-label">Electrical</p>
+  <p class="section-title">System Architecture</p>
+  <p class="body-text">
+    As electrical lead, I was responsible for the full electrical system from power distribution
+    to sensor wiring, ensuring everything was competition-ready and reliable under match conditions.
+  </p>
+  <table class="comp-table">
+    <thead><tr><th>Subsystem</th><th>Responsibility</th></tr></thead>
+    <tbody>
+      <tr><td>Power Distribution</td><td>Designed wiring layouts and component placement for reliable power delivery</td></tr>
+      <tr><td>Motor Controllers</td><td>Wired and configured motor controllers for drive train and mechanisms</td></tr>
+      <tr><td>Sensors</td><td>Integrated encoders, limit switches, and cameras for autonomous and driver assistance</td></tr>
+      <tr><td>Control System</td><td>RoboRio-based control system wiring and CAN bus layout</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="content-section">
+  <p class="section-label">Mechanical</p>
+  <p class="section-title">Design & Fabrication</p>
+  <ul class="detail-list">
+    <li>Designed chassis layouts and mechanical subsystems using top-down CAD modeling in SOLIDWORKS</li>
+    <li>Executed machining, fabrication, and full subsystem integration across mechanical interfaces</li>
+    <li>Managed component positioning and packaging within tight robot frame constraints</li>
+  </ul>
+</div>
+
+<div class="content-section" style="border-bottom:none;">
+  <p class="section-label">Achievements</p>
+  <div class="highlights">
+    <div class="highlight-card">
+      <div class="highlight-num">2×</div>
+      <div class="highlight-label">FIRST World Championships qualifications</div>
+    </div>
+    <div class="highlight-card">
+      <div class="highlight-num">3 yrs</div>
+      <div class="highlight-label">On the team, across electrical and mechanical roles</div>
+    </div>
+    <div class="highlight-card">
+      <div class="highlight-num">Lead</div>
+      <div class="highlight-label">Electrical subteam lead — full robot wiring architecture</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span>© 2026 Sophia Bian</span>
+  <a href="projects.html">← Back to projects</a>
+</footer>
+
+</body>
+</html>

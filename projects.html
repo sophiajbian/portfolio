@@ -48,8 +48,17 @@
     display: flex;
     flex-direction: column;
     transition: box-shadow 0.2s, transform 0.2s;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
   }
   .project-card:hover { box-shadow: 0 8px 32px rgba(90,122,94,0.12); transform: translateY(-2px); }
+  .card-hover-cta {
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    font-size: 0.82rem; font-weight: 700; color: var(--sage);
+    margin-top: 0.75rem; opacity: 0; transition: opacity 0.2s;
+  }
+  .project-card:hover .card-hover-cta { opacity: 1; }
   .project-card.featured { grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr; }
   .card-visual {
     aspect-ratio: 16/9;
@@ -137,7 +146,7 @@
 <div class="projects-grid">
 
   <!-- FORMULA SAE — FEATURED -->
-  <div class="project-card featured">
+  <a href="project-formula.html" class="project-card featured">
     <div class="card-visual">
       <img src="formula.jpg" alt="Northwestern Formula SAE">
     </div>
@@ -164,12 +173,13 @@
       </ul>
       <div class="card-footer">
         <span class="card-link placeholder">🔒 Private repo</span>
+        <span class="card-hover-cta">View project →</span>
       </div>
     </div>
-  </div>
+  </a>
 
   <!-- WIRELESS FLUORIMETER -->
-  <div class="project-card">
+  <a href="project-fluorimeter.html" class="project-card">
     <div class="card-visual">
       <img src="fluorimeter.jpg" alt="Wireless Fluorimeter">
     </div>
@@ -191,17 +201,18 @@
       <ul class="card-bullets">
         <li>Assembled flexible PCB-based prototypes through surface-mount soldering and hardware integration</li>
         <li>Performed validation and functional testing of sensing, power, and Bluetooth communication systems</li>
-        <li>Supported debugging and iterative refinement of prototype hardware</li>
-        <li>Contributed to the development of a compact fluorescence sensing platform for biomedical research</li>
+        <li>Verified device functionality through hardware testing and data collection experiments</li>
+       <li>Supported prototype fabrication for a wireless fluorescence sensing platform</li>
       </ul>
       <div class="card-footer">
         <span class="card-link placeholder">🔬 Ongoing research</span>
+        <span class="card-hover-cta">View project →</span>
       </div>
     </div>
-  </div>  
+  </a>
 
   <!-- FIRST ROBOTICS -->
-  <div class="project-card">
+  <a href="project-robotics.html" class="project-card">
     <div class="card-visual">
       <img src="robotics.jpg" alt="FIRST Robotics Team 1868">
     </div>
@@ -227,12 +238,13 @@
         <li>Mentored teammates in CAD, electronics, and manufacturing — qualified to FIRST World Championships twice</li>
       </ul>
       <div class="card-footer">
+        <span class="card-hover-cta">View project →</span>
       </div>
     </div>
-  </div>
+  </a>
 
   <!-- RESONANCE -->
-  <div class="project-card">
+  <a href="project-resonance.html" class="project-card">
     <div class="card-visual" style="background: linear-gradient(135deg, #2b2438 0%, #4a3b63 100%); font-size: 3rem;">
       🎻
       <span class="placeholder-label">Add photo → resonance.jpg</span>
@@ -259,12 +271,13 @@
       </ul>
       <div class="card-footer">
         <span class="card-link placeholder">📸 Photos coming soon</span>
+        <span class="card-hover-cta">View project →</span>
       </div>
     </div>
-  </div>
+  </a>
 
   <!-- SPICALIGN -->
-  <div class="project-card">
+  <a href="project-spicalign.html" class="project-card">
     <div class="card-visual" style="background: linear-gradient(135deg, #2a1e3a 0%, #3d2952 100%); font-size: 3rem;">
       🏥
       <span class="placeholder-label">Add photo → spicalign.jpg</span>
@@ -291,9 +304,10 @@
       </ul>
       <div class="card-footer">
         <span class="card-link placeholder">📸 Photos coming soon</span>
+        <span class="card-hover-cta">View project →</span>
       </div>
     </div>
-  </div>
+  </a>
 
   <!-- PLACEHOLDER -->
   <div class="project-card placeholder-card">

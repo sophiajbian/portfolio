@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formula SAE — Sophia Bian</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#f2f5f0; --bg-card:#e8ede5; --sage:#5a7a5e; --sage-mid:#7a9e7e;
+    --sage-light:#aec5b0; --sage-pale:#d4e2d6; --ink:#1c2b1e;
+    --ink-muted:#5a6b5c; --ink-faint:#94a896; --white:#fafcf9;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--ink); font-family:'DM Sans',sans-serif; font-size:16px; line-height:1.6; }
+
+  nav { position:sticky; top:0; z-index:100; background:var(--bg); display:flex; justify-content:space-between; align-items:center; padding:1.4rem 5vw; border-bottom:1px solid var(--sage-pale); }
+  .nav-logo { font-family:'DM Serif Display',serif; font-size:1.1rem; color:var(--ink); text-decoration:none; }
+  nav ul { list-style:none; display:flex; gap:1.5rem; align-items:center; }
+  nav ul a { color:var(--ink-muted); text-decoration:none; font-size:0.88rem; font-weight:500; transition:color 0.2s; }
+  nav ul a:hover, nav ul a.active { color:var(--sage); }
+  .nav-cta { background:var(--sage) !important; color:var(--white) !important; padding:0.55rem 1.4rem; border-radius:2rem; font-weight:600 !important; }
+  .nav-cta:hover { background:var(--ink) !important; }
+
+  /* HERO */
+  .project-hero { padding:5rem 5vw 0; border-bottom:1px solid var(--sage-pale); }
+  .back-link { display:inline-flex; align-items:center; gap:0.4rem; font-size:0.82rem; font-weight:600; color:var(--ink-faint); text-decoration:none; margin-bottom:2rem; transition:color 0.2s; }
+  .back-link:hover { color:var(--sage); }
+  .hero-meta { display:flex; align-items:center; gap:1rem; margin-bottom:1.2rem; flex-wrap:wrap; }
+  .hero-year { font-size:0.78rem; color:var(--ink-faint); font-weight:600; }
+  .status-badge { font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:0.3rem 0.8rem; border-radius:2rem; border:1.5px solid var(--sage); color:var(--sage); }
+  .status-badge.ongoing { border-color:var(--sage); color:var(--sage); }
+  .project-hero h1 { font-family:'DM Serif Display',serif; font-size:clamp(2.4rem,5vw,4rem); font-weight:400; line-height:1.1; margin-bottom:1.2rem; }
+  .project-hero h1 em { font-style:italic; color:var(--sage); }
+  .hero-desc { font-size:1.05rem; color:var(--ink-muted); line-height:1.8; max-width:640px; margin-bottom:1.8rem; }
+  .tag-row { display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:3rem; }
+  .tag { font-size:0.78rem; font-weight:600; padding:0.35rem 0.9rem; border-radius:2rem; border:1.5px solid var(--sage-light); color:var(--sage); }
+  .hero-photo { width:100%; max-height:520px; object-fit:cover; object-position:center; display:block; border-radius:1rem 1rem 0 0; }
+
+  /* CONTENT */
+  .content-section { padding:4rem 5vw; border-bottom:1px solid var(--sage-pale); max-width:900px; }
+  .section-label { font-size:0.72rem; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:1.5rem; }
+  .section-title { font-family:'DM Serif Display',serif; font-size:1.8rem; font-weight:400; margin-bottom:1rem; }
+  .body-text { font-size:0.97rem; color:var(--ink-muted); line-height:1.85; margin-bottom:1rem; }
+
+  /* COMPONENT TABLE */
+  .comp-table { width:100%; border-collapse:collapse; margin-top:1rem; }
+  .comp-table th { font-size:0.72rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--ink-faint); padding:0.6rem 1rem; text-align:left; border-bottom:1px solid var(--sage-pale); }
+  .comp-table td { font-size:0.88rem; color:var(--ink-muted); padding:0.9rem 1rem; border-bottom:1px solid var(--bg-card); vertical-align:top; }
+  .comp-table td:first-child { font-weight:600; color:var(--ink); font-size:0.9rem; white-space:nowrap; }
+
+  /* HIGHLIGHTS */
+  .highlights { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:1.5rem; }
+  .highlight-card { background:var(--white); border:1px solid var(--sage-pale); border-radius:1rem; padding:1.5rem; }
+  .highlight-num { font-family:'DM Serif Display',serif; font-size:2rem; color:var(--sage); margin-bottom:0.25rem; }
+  .highlight-label { font-size:0.82rem; color:var(--ink-muted); }
+
+  /* BULLET LIST */
+  .detail-list { list-style:none; display:flex; flex-direction:column; gap:0.6rem; margin-top:0.5rem; }
+  .detail-list li { font-size:0.92rem; color:var(--ink-muted); padding-left:1.3rem; position:relative; line-height:1.6; }
+  .detail-list li::before { content:'—'; position:absolute; left:0; color:var(--sage-light); }
+
+  footer { background:var(--ink); border-top:1px solid rgba(255,255,255,0.06); padding:1.5rem 5vw; display:flex; justify-content:space-between; align-items:center; font-size:0.78rem; color:var(--ink-faint); }
+  footer a { color:var(--ink-faint); text-decoration:none; }
+  footer a:hover { color:var(--sage-light); }
+
+  @media (max-width:768px) {
+    .highlights { grid-template-columns:1fr 1fr; }
+    nav ul li:not(:last-child) { display:none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Sophia Bian</a>
+  <ul>
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html" class="active">Projects</a></li>
+    <li><a href="music.html">Music</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="resume.html">Resume</a></li>
+    <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="project-hero">
+  <a href="projects.html" class="back-link">← Back to all projects</a>
+  <div class="hero-meta">
+    <span class="hero-year">Sept 2025 – Present</span>
+    <span class="status-badge ongoing">In Progress</span>
+  </div>
+  <h1>Northwestern Formula SAE:<br><em>Data Acquisition</em></h1>
+  <p class="hero-desc">
+    Building the systems that collect, display, and interpret real-time vehicle data
+    for Northwestern's Formula SAE race car — from dashboard firmware to custom PCB design.
+  </p>
+  <div class="tag-row">
+    <span class="tag">C++</span>
+    <span class="tag">PCB Design</span>
+    <span class="tag">Altium Designer</span>
+    <span class="tag">Embedded Systems</span>
+    <span class="tag">Git</span>
+  </div>
+  <img src="formula.jpg" alt="Northwestern Formula SAE" class="hero-photo"
+       onerror="this.style.display='none'">
+</div>
+
+<div class="content-section">
+  <p class="section-label">Overview</p>
+  <p class="class="section-title">The Project</p>
+  <p class="body-text">
+    Northwestern Formula Racing's Data Acquisition subteam is responsible for collecting and visualizing
+    real-time telemetry from the race car during testing and competition. As a member of the DAQ subteam,
+    I've worked on both the software and hardware sides — contributing to the dashboard display system
+    and designing a revised PCB for the dashboard controller.
+  </p>
+  <p class="body-text">
+    The dashboard system gives the driver and engineers immediate feedback on vehicle state, including
+    speed, temperatures, and system health. Visual indicators like NeoPixel LEDs provide at-a-glance
+    status information even in bright outdoor conditions.
+  </p>
+</div>
+
+<div class="content-section">
+  <p class="section-label">Hardware</p>
+  <p class="section-title">The PCB</p>
+  <p class="body-text">
+    I designed Version 2 of the dashboard controller PCB in Altium Designer, improving on the previous
+    iteration with better component placement and layout for the car's packaging constraints.
+  </p>
+  <table class="comp-table">
+    <thead><tr><th>Component</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr><td>Microcontroller</td><td>Core processing unit handling CAN bus data and display output</td></tr>
+      <tr><td>NeoPixel LED Array</td><td>Visual status indicators for driver feedback</td></tr>
+      <tr><td>CAN Transceiver</td><td>Communication with vehicle ECU and other modules</td></tr>
+      <tr><td>Display Interface</td><td>Driver-facing dashboard readout for real-time telemetry</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="content-section">
+  <p class="section-label">Software</p>
+  <p class="section-title">The Firmware</p>
+  <p class="body-text">
+    The dashboard firmware is written in C++ and responsible for parsing incoming CAN messages, updating
+    the display, and driving the LED indicators based on vehicle state.
+  </p>
+  <ul class="detail-list">
+    <li>Developed features for a C++-based dashboard system to display real-time vehicle telemetry</li>
+    <li>Designed and tested NeoPixel LED drivers for visual status indicators on the car</li>
+    <li>Collaborated across subteams using Git-based workflows and code review</li>
+    <li>Participated in testing sessions to validate behavior under real operating conditions</li>
+  </ul>
+</div>
+
+<div class="content-section" style="border-bottom:none;">
+  <p class="section-label">Details</p>
+  <div class="highlights">
+    <div class="highlight-card">
+      <div class="highlight-num">V2</div>
+      <div class="highlight-label">Dashboard controller PCB revision designed in Altium</div>
+    </div>
+    <div class="highlight-card">
+      <div class="highlight-num">C++</div>
+      <div class="highlight-label">Firmware language for dashboard and LED driver systems</div>
+    </div>
+    <div class="highlight-card">
+      <div class="highlight-num">🔒</div>
+      <div class="highlight-label">Private team repository — code not publicly available</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span>© 2026 Sophia Bian</span>
+  <a href="projects.html">← Back to projects</a>
+</footer>
+
+</body>
+</html>

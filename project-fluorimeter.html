@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wireless Fluorimeter — Sophia Bian</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#f2f5f0; --bg-card:#e8ede5; --sage:#5a7a5e; --sage-mid:#7a9e7e;
+    --sage-light:#aec5b0; --sage-pale:#d4e2d6; --ink:#1c2b1e;
+    --ink-muted:#5a6b5c; --ink-faint:#94a896; --white:#fafcf9;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--ink); font-family:'DM Sans',sans-serif; font-size:16px; line-height:1.6; }
+
+  nav { position:sticky; top:0; z-index:100; background:var(--bg); display:flex; justify-content:space-between; align-items:center; padding:1.4rem 5vw; border-bottom:1px solid var(--sage-pale); }
+  .nav-logo { font-family:'DM Serif Display',serif; font-size:1.1rem; color:var(--ink); text-decoration:none; }
+  nav ul { list-style:none; display:flex; gap:1.5rem; align-items:center; }
+  nav ul a { color:var(--ink-muted); text-decoration:none; font-size:0.88rem; font-weight:500; transition:color 0.2s; }
+  nav ul a:hover, nav ul a.active { color:var(--sage); }
+  .nav-cta { background:var(--sage) !important; color:var(--white) !important; padding:0.55rem 1.4rem; border-radius:2rem; font-weight:600 !important; }
+  .nav-cta:hover { background:var(--ink) !important; }
+
+  .project-hero { padding:5rem 5vw 0; border-bottom:1px solid var(--sage-pale); }
+  .back-link { display:inline-flex; align-items:center; gap:0.4rem; font-size:0.82rem; font-weight:600; color:var(--ink-faint); text-decoration:none; margin-bottom:2rem; transition:color 0.2s; }
+  .back-link:hover { color:var(--sage); }
+  .hero-meta { display:flex; align-items:center; gap:1rem; margin-bottom:1.2rem; flex-wrap:wrap; }
+  .hero-year { font-size:0.78rem; color:var(--ink-faint); font-weight:600; }
+  .status-badge { font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:0.3rem 0.8rem; border-radius:2rem; border:1.5px solid var(--sage); color:var(--sage); }
+  .project-hero h1 { font-family:'DM Serif Display',serif; font-size:clamp(2.4rem,5vw,4rem); font-weight:400; line-height:1.1; margin-bottom:1.2rem; }
+  .project-hero h1 em { font-style:italic; color:var(--sage); }
+  .hero-desc { font-size:1.05rem; color:var(--ink-muted); line-height:1.8; max-width:640px; margin-bottom:1.8rem; }
+  .tag-row { display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:3rem; }
+  .tag { font-size:0.78rem; font-weight:600; padding:0.35rem 0.9rem; border-radius:2rem; border:1.5px solid var(--sage-light); color:var(--sage); }
+  .hero-photo { width:100%; max-height:520px; object-fit:cover; object-position:center; display:block; border-radius:1rem 1rem 0 0; }
+
+  .content-section { padding:4rem 5vw; border-bottom:1px solid var(--sage-pale); max-width:900px; }
+  .section-label { font-size:0.72rem; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:1.5rem; }
+  .section-title { font-family:'DM Serif Display',serif; font-size:1.8rem; font-weight:400; margin-bottom:1rem; }
+  .body-text { font-size:0.97rem; color:var(--ink-muted); line-height:1.85; margin-bottom:1rem; }
+
+  .comp-table { width:100%; border-collapse:collapse; margin-top:1rem; }
+  .comp-table th { font-size:0.72rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--ink-faint); padding:0.6rem 1rem; text-align:left; border-bottom:1px solid var(--sage-pale); }
+  .comp-table td { font-size:0.88rem; color:var(--ink-muted); padding:0.9rem 1rem; border-bottom:1px solid var(--bg-card); vertical-align:top; }
+  .comp-table td:first-child { font-weight:600; color:var(--ink); font-size:0.9rem; }
+
+  .highlights { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:1.5rem; }
+  .highlight-card { background:var(--white); border:1px solid var(--sage-pale); border-radius:1rem; padding:1.5rem; }
+  .highlight-num { font-family:'DM Serif Display',serif; font-size:2rem; color:var(--sage); margin-bottom:0.25rem; }
+  .highlight-label { font-size:0.82rem; color:var(--ink-muted); }
+
+  .detail-list { list-style:none; display:flex; flex-direction:column; gap:0.6rem; margin-top:0.5rem; }
+  .detail-list li { font-size:0.92rem; color:var(--ink-muted); padding-left:1.3rem; position:relative; line-height:1.6; }
+  .detail-list li::before { content:'—'; position:absolute; left:0; color:var(--sage-light); }
+
+  footer { background:var(--ink); border-top:1px solid rgba(255,255,255,0.06); padding:1.5rem 5vw; display:flex; justify-content:space-between; align-items:center; font-size:0.78rem; color:var(--ink-faint); }
+  footer a { color:var(--ink-faint); text-decoration:none; }
+  footer a:hover { color:var(--sage-light); }
+
+  @media (max-width:768px) {
+    .highlights { grid-template-columns:1fr 1fr; }
+    nav ul li:not(:last-child) { display:none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Sophia Bian</a>
+  <ul>
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html" class="active">Projects</a></li>
+    <li><a href="music.html">Music</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="resume.html">Resume</a></li>
+    <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="project-hero">
+  <a href="projects.html" class="back-link">← Back to all projects</a>
+  <div class="hero-meta">
+    <span class="hero-year">2026 – Present</span>
+    <span class="status-badge ongoing">Ongoing Research</span>
+  </div>
+  <h1>Wireless<br><em>Fluorimeter</em> Development</h1>
+  <p class="hero-desc">
+    Undergraduate research at Northwestern's Querrey Simpson Institute for Bioelectronics —
+    developing a portable, wireless fluorimeter for continuous fluorescence monitoring
+    in biomedical applications.
+  </p>
+  <div class="tag-row">
+    <span class="tag">Research</span>
+    <span class="tag">Bioelectronics</span>
+    <span class="tag">Flexible PCB</span>
+    <span class="tag">Bluetooth</span>
+    <span class="tag">Hardware</span>
+    <span class="tag">Soldering</span>
+  </div>
+  <img src="fluorimeter.jpg" alt="Wireless Fluorimeter" class="hero-photo"
+       onerror="this.style.display='none'">
+</div>
+
+<div class="content-section">
+  <p class="section-label">Overview</p>
+  <p class="section-title">The Project</p>
+  <p class="body-text">
+    Working as an undergraduate research assistant under Dr. Taewan Park at the Querrey Simpson
+    Institute for Bioelectronics, I contribute to the development of a compact, wireless fluorimeter
+    designed for continuous fluorescence sensing in biomedical research settings.
+  </p>
+  <p class="body-text">
+    Fluorimeters measure the intensity of fluorescent light emitted by a sample — useful in applications
+    like monitoring biological markers, drug delivery, or metabolic activity. The goal of this device
+    is to make that sensing portable, wearable, and wireless.
+  </p>
+</div>
+
+<div class="content-section">
+  <p class="section-label">Hardware</p>
+  <p class="section-title">The Device</p>
+  <p class="body-text">
+    The prototype uses flexible PCB construction to allow conformable form factors suited to
+    wearable or implantable biomedical applications. I've been involved in assembly, integration,
+    and iterative testing of the hardware.
+  </p>
+  <table class="comp-table">
+    <thead><tr><th>Subsystem</th><th>Details</th></tr></thead>
+    <tbody>
+      <tr><td>Sensing</td><td>Fluorescence detection via photodetector and excitation LED</td></tr>
+      <tr><td>PCB Form Factor</td><td>Flexible PCB enabling compact, conformable designs</td></tr>
+      <tr><td>Wireless Comms</td><td>Bluetooth communication for untethered data streaming</td></tr>
+      <tr><td>Power</td><td>Compact power system validated for continuous operation</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="content-section" style="border-bottom:none;">
+  <p class="section-label">My Contributions</p>
+  <p class="section-title">What I've Done</p>
+  <ul class="detail-list">
+    <li>Assembled flexible PCB-based prototypes through surface-mount soldering and hardware integration</li>
+    <li>Performed validation and functional testing of sensing, power, and Bluetooth communication systems</li>
+    <li>Supported debugging and iterative refinement of prototype hardware across multiple build cycles</li>
+    <li>Contributed to development of a compact fluorescence sensing platform for biomedical research</li>
+  </ul>
+</div>
+
+<footer>
+  <span>© 2026 Sophia Bian</span>
+  <a href="projects.html">← Back to projects</a>
+</footer>
+
+</body>
+</html>
