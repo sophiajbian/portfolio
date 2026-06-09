@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Music — Sophia Bian</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f2f5f0; --bg-card: #e8ede5; --sage: #5a7a5e; --sage-mid: #7a9e7e;
+    --sage-light: #aec5b0; --sage-pale: #d4e2d6; --ink: #1c2b1e;
+    --ink-muted: #5a6b5c; --ink-faint: #94a896; --white: #fafcf9;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--ink); font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.6; }
+
+  nav {
+    position: sticky; top: 0; z-index: 100; background: var(--bg);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.4rem 5vw; border-bottom: 1px solid var(--sage-pale);
+  }
+  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--ink); text-decoration: none; }
+  nav ul { list-style: none; display: flex; gap: 1.5rem; align-items: center; }
+  nav ul a { color: var(--ink-muted); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: color 0.2s; }
+  nav ul a:hover, nav ul a.active { color: var(--sage); }
+  .nav-cta { background: var(--sage) !important; color: var(--white) !important; padding: 0.55rem 1.4rem; border-radius: 2rem; font-weight: 600 !important; }
+  .nav-cta:hover { background: var(--ink) !important; }
+
+  .page-header {
+    padding: 5rem 5vw 3rem; border-bottom: 1px solid var(--sage-pale);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end;
+  }
+  .eyebrow { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--sage-mid); margin-bottom: 1rem; }
+  .page-header h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.5rem, 4vw, 3.8rem); font-weight: 400; line-height: 1.1; }
+  .page-header h1 em { font-style: italic; color: var(--sage); }
+  .page-header .intro { font-size: 1rem; color: var(--ink-muted); line-height: 1.8; }
+
+  .content-section { padding: 2rem 5vw 4rem; border-bottom: 1px solid var(--sage-pale); }
+  .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 2rem; }
+
+  /* AWARDS ROW */
+  .awards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .award-card {
+    background: var(--white); border: 1px solid var(--sage-pale); border-radius: 1rem;
+    padding: 1.5rem; display: flex; flex-direction: column; gap: 0.4rem;
+  }
+  .award-title { font-weight: 600; font-size: 0.95rem; color: var(--ink); }
+  .award-event { font-size: 0.82rem; color: var(--sage); font-weight: 500; }
+  .award-date { font-size: 0.75rem; color: var(--ink-faint); }
+  .award-detail { font-size: 0.82rem; color: var(--ink-muted); line-height: 1.5; }
+
+  /* ENSEMBLE TIMELINE */
+  .timeline { display: flex; flex-direction: column; }
+  .timeline-item { display: grid; grid-template-columns: 9rem 1fr; gap: 2rem; padding: 2rem 0; border-bottom: 1px solid var(--bg-card); }
+  .timeline-item:last-child { border-bottom: none; }
+  .timeline-date { font-size: 0.78rem; color: var(--ink-faint); font-weight: 600; padding-top: 0.15rem; line-height: 1.5; }
+  .timeline-content {}
+  .timeline-title { font-family: 'DM Serif Display', serif; font-size: 1.1rem; margin-bottom: 0.2rem; }
+  .timeline-role { font-size: 0.85rem; color: var(--sage); font-weight: 600; margin-bottom: 0.3rem; }
+  .timeline-org { font-size: 0.8rem; color: var(--ink-faint); margin-bottom: 0.8rem; }
+  .timeline-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+  .timeline-bullets li { font-size: 0.88rem; color: var(--ink-muted); padding-left: 1.1rem; position: relative; line-height: 1.5; }
+  .timeline-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--sage-light); }
+
+  /* REPERTOIRE */
+  .repertoire-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+  .rep-group h3 { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sage-mid); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--sage-pale); }
+  .rep-list { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; }
+  .rep-list li { font-size: 0.85rem; color: var(--ink-muted); line-height: 1.4; }
+  .rep-list li strong { color: var(--ink); font-weight: 500; }
+
+  /* INSTRUCTORS */
+  .instructors-list { display: flex; flex-direction: column; gap: 0.6rem; }
+  .instructor-row { display: flex; gap: 1rem; align-items: baseline; font-size: 0.9rem; }
+  .instructor-date { font-size: 0.78rem; color: var(--ink-faint); font-weight: 600; min-width: 9rem; }
+  .instructor-name { color: var(--ink); font-weight: 500; }
+  .instructor-role { color: var(--ink-faint); font-size: 0.82rem; }
+
+  footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,0.06); padding: 1.5rem 5vw; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: var(--ink-faint); }
+  footer a { color: var(--ink-faint); text-decoration: none; }
+  footer a:hover { color: var(--sage-light); }
+
+  @media (max-width: 768px) {
+    .page-header { grid-template-columns: 1fr; }
+    .awards-grid { grid-template-columns: 1fr; }
+    .timeline-item { grid-template-columns: 1fr; gap: 0.3rem; }
+    .repertoire-grid { grid-template-columns: 1fr; }
+    nav ul li:not(:last-child) { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Sophia Bian</a>
+  <ul>
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="music.html" class="active">Music</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="resume.html">Resume</a></li>
+    <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div>
+    <p class="eyebrow">Music</p>
+    <h1>Flute &amp;<br><em>piccolo</em><br>performer</h1>
+  </div>
+  <div class="intro">
+    I am a former Flute Performance major at the Bienen School of Music.
+    I've performed with the San Francisco Symphony Youth Orchestra, won state-level competitions,
+    and played the flute for 7+ years. 
+  </div>
+</div>
+
+<!-- AWARDS -->
+
+<!-- 
+<section class="content-section">
+  <p class="section-label">Awards &amp; Recognition</p>
+  <div class="awards-grid">
+    <div class="award-card">
+      <div class="award-title">Superior Command Performance Award</div>
+      <div class="award-event">CMEA Bay Section Solo &amp; Ensemble Festival</div>
+      <div class="award-date">2024</div>
+      <div class="award-detail">Full score with a subjective judge's "Command Performance" distinction</div>
+    </div>
+    <div class="award-card">
+      <div class="award-title">Winner — Junior Bach Festival</div>
+      <div class="award-event">Junior Bach Festival</div>
+      <div class="award-date">2024</div>
+      <div class="award-detail">Awarded a concert performance from a pool of 400+ applicants</div>
+    </div>
+    <div class="award-card">
+      <div class="award-title">Unanimous Superior — Two Years Consecutive</div>
+      <div class="award-event">CMEA Large Ensemble Festival</div>
+      <div class="award-date">2023, 2024</div>
+      <div class="award-detail">Highest rating as principal flute (2024) and solo piccolo (2023) of the Gunn Wind Ensemble</div>
+    </div>
+    <div class="award-card">
+      <div class="award-title">1st Alternate Prize</div>
+      <div class="award-event">MTAC VOCE Competition — State Final</div>
+      <div class="award-date">2023</div>
+      <div class="award-detail">Second highest score at the California state level; selected through two competitive rounds</div>
+    </div>
+  </div>
+</section>
+-->
+
+<!-- ENSEMBLE EXPERIENCE -->
+<section class="content-section">
+  <p class="section-label">Ensemble Experience</p>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-date">Sept 2025 – June 2026</div>
+      <div class="timeline-content">
+        <div class="timeline-title">Bienen School of Music Performing Ensembles</div>
+        <div class="timeline-role">Flute &amp; Piccolo</div>
+        <div class="timeline-org">Bienen School of Music · Evanston, IL</div>
+        <ul class="timeline-bullets">
+          <li>Rehearsed 4 hours weekly</li>
+          <li>Member of Symphonic Band and Chamber Orchestra</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">Sept 2023 – May 2025</div>
+      <div class="timeline-content">
+        <div class="timeline-title">San Francisco Symphony Youth Orchestra</div>
+        <div class="timeline-role">Flute &amp; Piccolo</div>
+        <div class="timeline-org">San Francisco Symphony · San Francisco, CA</div>
+        <ul class="timeline-bullets">
+          <li>Rehearsed 4–13 hours weekly at Davies Symphony Hall</li>
+          <li>Performed as the Bird (flute) in the 2023 annual "Peter and the Wolf," narrated by Tom Kenny (SpongeBob voice actor), continuing a 40-year tradition</li>
+          <li>Performed piccolo in Tchaikovsky's 4th Symphony for a sold out concert</li>
+          <li>Worked directly with Catherine Payne, SF Symphony Piccolo, in sectionals</li>
+          <li>Full program scholarship funded by the National Endowment for the Arts</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">Aug 2021 – Present</div>
+      <div class="timeline-content">
+        <div class="timeline-title">Gunn High School Bands — Wind Ensemble</div>
+        <div class="timeline-role">Principal Flute &amp; Piccolo</div>
+        <div class="timeline-org">Henry M. Gunn High School · Palo Alto, CA</div>
+        <ul class="timeline-bullets">
+          <li>Served as flute section leader, rehearsing 4.5 hours per week</li>
+          <li>Piccolo (2022–2023), principal flute (2023–2025)</li>
+          <li>Performed symphonic band repertoire at seasonal concerts</li>
+          <li>John Philip Sousa Award Recipient</li>
+        </ul>
+      </div>
+    </div>
+
+    <!--
+    <div class="timeline-item">
+      <div class="timeline-date">Feb 2023</div>
+      <div class="timeline-content">
+        <div class="timeline-title">California All-State High School Concert Band</div>
+        <div class="timeline-role">1st Flute</div>
+        <div class="timeline-org">California Band Directors Association · Fresno, CA</div>
+        <ul class="timeline-bullets">
+          <li>Auditioned through two competitive rounds into a 1st flute position</li>
+          <li>Rehearsed 15 hours under Dr. Elizabeth Petersen</li>
+          <li>Performed 30 minutes of repertoire at the California All-State Music Educators Conference</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">Nov 2022</div>
+      <div class="timeline-content">
+        <div class="timeline-title">Mahler at Pacific Orchestra</div>
+        <div class="timeline-role">Principal 2nd Flute</div>
+        <div class="timeline-org">University of the Pacific · Stockton, CA</div>
+        <ul class="timeline-bullets">
+          <li>Performed Gustav Mahler's <em>Totenfeier</em> as Principal 2nd Flute</li>
+          <li>Rehearsed alongside UOP Music Conservatory students as an invited high schooler</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">Sept 2022 –<br>May 2023</div>
+      <div class="timeline-content">
+        <div class="timeline-title">California Youth Symphony</div>
+        <div class="timeline-role">Assistant Piccolo &amp; 2nd Flute</div>
+        <div class="timeline-org">California Youth Symphony · Palo Alto, CA</div>
+        <ul class="timeline-bullets">
+          <li>Performed at seasonal concerts as assistant piccolo and 2nd flute in the Associate Orchestra</li>
+          <li>Invited to join the Senior Orchestra as principal piccolo</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">June 2022</div>
+      <div class="timeline-content">
+        <div class="timeline-title">Philadelphia International Music Festival (PIMF)</div>
+        <div class="timeline-role">Flute — Senior Orchestra</div>
+        <div class="timeline-org">Valley Forge Military Academy · Wayne, PA</div>
+        <ul class="timeline-bullets">
+          <li>Studied conducting with Maestro Thomas Hong, UPenn Orchestra Director</li>
+          <li>Performed with a Grammy-nominated pianist</li>
+          <li>Studied flute and piccolo with Loren Lind, retired Philadelphia Orchestra flutist</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">Feb – June 2023</div>
+      <div class="timeline-content">
+        <div class="timeline-title">TKO Master Flutes Flute Choir</div>
+        <div class="timeline-role">Flute</div>
+        <div class="timeline-org">Orozco Flute Studios · San Jose, CA</div>
+        <ul class="timeline-bullets">
+          <li>Performed at the 2023 Flutes by the Sea masterclass</li>
+          <li>Brought live music to senior homes through community performances</li>
+        </ul>
+      </div>
+    </div>
+-->
+
+
+  </div>
+</section>
+
+<!-- REPERTOIRE -->
+<section class="content-section">
+  <p class="section-label">Repertoire</p>
+  <div class="repertoire-grid">
+
+    <div class="rep-group">
+      <h3>Orchestral — Performed Live</h3>
+      <ul class="rep-list">
+        <li><strong>Berlioz</strong> — <a href="https://youtu.be/63Yl2W6GrlA">Symphonie Fantastique</a> (Principal)</li>
+        <li><strong>Bernstein</strong> — <a href="https://youtu.be/aT_dhfyWeDc">Overture to "Candide"</a> (Principal)</li>
+        <li><strong>Mahler</strong> — <a href="https://youtu.be/7OjwFryl1H8">Symphony No. 5</a> (Piccolo)</li>
+        <li><strong>Prokofiev</strong> — Peter and the Wolf (Bird/Flute)</li>
+        <li><strong>Ravel</strong> — <a href="https://youtu.be/kwsch_EM5vQ">Daphnis et Chloé Suite No. 2</a> (Piccolo)</li>
+        <li><strong>Strauss</strong> — <a href="https://youtu.be/42lxB1Y75oU">Suite from "Der Rosenkavalier"</a> (Piccolo)</li>
+        <li><strong>Tchaikovsky</strong> — Nutcracker Suite (Principal)</li>
+        <li><strong>Wagner</strong> — <a href="https://youtu.be/6-rIEVI9AVw">Prelude and Liebestod from "Tristan und Isolde"</a> (Principal)</li>
+        <li><strong>Márquez</strong> — <a href="https://youtu.be/4K0zNkmjids">Danzón No. 2</a> (Principal)</li>
+      </ul>
+    </div>
+
+    <div class="rep-group">
+      <h3>Solo Repertoire</h3>
+      <ul class="rep-list">
+        <li><strong>Bach</strong> — Partita in A minor</li>
+        <li><strong>Bach</strong> — Sonata in C Major</li>
+        <li><strong>Bach</strong> — Sonata in E♭ Major</li>
+        <li><strong>Devienne</strong> — Concerto No. 7 in E minor, Mvt. 1</li>
+        <li><strong>Mozart</strong> — Concerto No. 1 in G Major</li>
+        <li><strong>Mozart</strong> — Concerto No. 2 in D Major</li>
+        <li><strong>Busser</strong> — Prelude et Scherzo</li>
+        <li><strong>Chaminade</strong> — Concertino</li>
+        <li><strong>Gaubert</strong> — Fantaisie</li>
+        <li><strong>Gaubert</strong> — Nocturne et Allegro Scherzando</li>
+        <li><strong>Ganne</strong> — Andante et Scherzo</li>
+        <li><strong>Honegger</strong> — Danse de la Chèvre</li>
+        <li><strong>Martin</strong> — Ballade</li>
+        <li><strong>Sancan</strong> — Sonatine</li>
+        <li><strong>Taffanel</strong> — Andante Pastoral et Scherzo</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- INSTRUCTORS -->
+<section class="content-section" style="border-bottom: none;">
+  <p class="section-label">Instructors</p>
+  <div class="instructors-list">
+    <div class="instructor-row">
+      <span class="instructor-date">2025 – present</span>
+      <span class="instructor-name">John Thorne</span>
+      <span class="instructor-role">— Professor at the Bienen School of Music</span>
+    </div>
+    <div class="instructor-row">
+      <span class="instructor-date">2023 – 2025</span>
+      <span class="instructor-name">Catherine Payne</span>
+      <span class="instructor-role">— SF Symphony Piccolo & Professor at the San Francisco Conservatory of Music</span>
+    </div>
+    <div class="instructor-row">
+      <span class="instructor-date">2022 – 2025</span>
+      <span class="instructor-name">Teresa Orozco</span>
+      <span class="instructor-role">— Flute coach</span>
+    </div>
+    <div class="instructor-row">
+      <span class="instructor-date">2020 – 2022</span>
+      <span class="instructor-name">Laurie Benson</span>
+      <span class="instructor-role">— Flute coach</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Sophia Bian</span>
+  <a href="index.html">← Back to home</a>
+</footer>
+
+</body>
+</html>

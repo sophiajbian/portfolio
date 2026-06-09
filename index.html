@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sophia Bian</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #f2f5f0;
+    --bg-card:   #e8ede5;
+    --sage:      #5a7a5e;
+    --sage-mid:  #7a9e7e;
+    --sage-light:#aec5b0;
+    --sage-pale: #d4e2d6;
+    --ink:       #1c2b1e;
+    --ink-muted: #5a6b5c;
+    --ink-faint: #94a896;
+    --white:     #fafcf9;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 5vw;
+    border-bottom: 1px solid var(--sage-pale);
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  nav ul a {
+    color: var(--ink-muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  nav ul a:hover { color: var(--sage); }
+  .nav-cta {
+    background: var(--sage) !important;
+    color: var(--white) !important;
+    padding: 0.55rem 1.4rem;
+    border-radius: 2rem;
+    font-weight: 600 !important;
+  }
+  .nav-cta:hover { background: var(--ink) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: calc(100vh - 65px);
+    border-bottom: 1px solid var(--sage-pale);
+  }
+  .hero-left {
+    padding: 6rem 5vw 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1px solid var(--sage-pale);
+  }
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--sage-mid);
+    margin-bottom: 1.8rem;
+  }
+  .hero-left h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.8rem;
+    color: var(--ink);
+  }
+  .hero-left h1 em {
+    font-style: italic;
+    color: var(--sage);
+  }
+  .hero-desc {
+    font-size: 1rem;
+    color: var(--ink-muted);
+    line-height: 1.8;
+    max-width: 400px;
+    border-left: 3px solid var(--sage-light);
+    padding-left: 1.2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  /* ── NAV GRID BUTTONS ── */
+  .hero-nav-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    max-width: 380px;
+    margin-bottom: 1.5rem;
+  }
+  .nav-btn {
+    display: block;
+    padding: 1rem 1.2rem;
+    border-radius: 0.75rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.2s;
+    border: 1.5px solid var(--sage-light);
+    color: var(--sage);
+    background: transparent;
+  }
+  .nav-btn:hover {
+    background: var(--sage);
+    color: var(--white);
+    border-color: var(--sage);
+  }
+  .nav-btn.filled {
+    background: var(--sage);
+    color: var(--white);
+    border-color: var(--sage);
+  }
+  .nav-btn.filled:hover { background: var(--ink); border-color: var(--ink); }
+
+  /* resume link */
+  .resume-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--ink-faint);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .resume-link:hover { color: var(--sage); }
+
+  /* ── HERO PHOTO ── */
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-card);
+  }
+  .hero-right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+  .hero-photo-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    color: var(--ink-faint);
+    font-size: 0.85rem;
+    background: linear-gradient(160deg, var(--bg-card) 0%, var(--sage-pale) 100%);
+  }
+  .hero-photo-placeholder .icon { font-size: 2.5rem; opacity: 0.4; }
+
+  /* ── CONTACT SECTION ── */
+  #contact {
+    background: var(--ink);
+    padding: 5rem 5vw;
+    text-align: center;
+  }
+  #contact h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 0.6rem;
+  }
+  #contact .contact-sub {
+    font-size: 1rem;
+    color: var(--sage-light);
+    margin-bottom: 2rem;
+    line-height: 1.7;
+  }
+  .contact-email {
+    display: inline-block;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--white);
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 0.7rem 1.6rem;
+    border-radius: 2rem;
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+    transition: all 0.2s;
+  }
+  .contact-email:hover { background: rgba(255,255,255,0.14); }
+  .contact-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.8rem;
+    border-radius: 2rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: 1.5px solid rgba(255,255,255,0.2);
+    color: var(--white);
+  }
+  .contact-link:hover { border-color: var(--sage-light); color: var(--sage-light); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 1.5rem 5vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+  }
+  footer a { color: var(--ink-faint); text-decoration: none; }
+  footer a:hover { color: var(--sage-light); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-right { height: 60vw; }
+    .hero-left { border-right: none; }
+    nav ul li:not(:last-child) { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">Sophia Bian</a>
+  <ul>
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="music.html">Music</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="resume.html">Resume</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Portfolio — 2026</p>
+    <h1>Hello!<br>I'm <em>Sophia</em></h1>
+    <p class="hero-desc">
+      I'm a rising second-year Electrical Engineering student at Northwestern University
+      interested in embedded systems, software development, and aerospace.
+      Explore my projects and interests below.
+    </p>
+
+    <!-- 2×2 page navigation buttons -->
+    <div class="hero-nav-grid">
+      <a href="about.html" class="nav-btn filled">About Me</a>
+      <a href="projects.html" class="nav-btn filled">Projects</a>
+      <a href="music.html" class="nav-btn">Music</a>
+      <a href="#contact" class="nav-btn">Contact</a>
+    </div>
+
+    <a href="resume.pdf" class="resume-link" target="_blank">↓ View my resume</a>
+  </div>
+  <div class="hero-right">
+    <!-- Save your photo as hero.jpg inside the portfolio/ folder -->
+    <img src="hero.jpg" alt="Sophia Bian"
+         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+    <div class="hero-photo-placeholder" style="display:none">
+      <span class="icon">✦</span>
+      <span>Add hero.jpg to this folder</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2>Thanks for stopping by!</h2>
+  <p class="contact-sub">Feel free to contact me:</p>
+  <a href="mailto:sophiabian2029@u.northwestern.edu" class="contact-email">
+    sophiabian2029@u.northwestern.edu
+  </a>
+  <div class="contact-links">
+    <a href="#" class="contact-link">LinkedIn</a>
+    <a href="#" class="contact-link">GitHub</a>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Sophia Bian</span>
+  <a href="#">Back to top ↑</a>
+</footer>
+
+</body>
+</html>

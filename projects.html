@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Sophia Bian</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f2f5f0; --bg-card: #e8ede5; --sage: #5a7a5e; --sage-mid: #7a9e7e;
+    --sage-light: #aec5b0; --sage-pale: #d4e2d6; --ink: #1c2b1e;
+    --ink-muted: #5a6b5c; --ink-faint: #94a896; --white: #fafcf9;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--ink); font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.6; }
+
+  nav {
+    position: sticky; top: 0; z-index: 100; background: var(--bg);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.4rem 5vw; border-bottom: 1px solid var(--sage-pale);
+  }
+  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--ink); text-decoration: none; }
+  nav ul { list-style: none; display: flex; gap: 1.5rem; align-items: center; }
+  nav ul a { color: var(--ink-muted); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: color 0.2s; }
+  nav ul a:hover, nav ul a.active { color: var(--sage); }
+  .nav-cta { background: var(--sage) !important; color: var(--white) !important; padding: 0.55rem 1.4rem; border-radius: 2rem; font-weight: 600 !important; }
+  .nav-cta:hover { background: var(--ink) !important; }
+
+  .page-header {
+    padding: 5rem 5vw 3rem;
+    border-bottom: 1px solid var(--sage-pale);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end;
+  }
+  .eyebrow { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--sage-mid); margin-bottom: 1rem; }
+  .page-header h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.5rem, 4vw, 3.8rem); font-weight: 400; line-height: 1.1; }
+  .page-header h1 em { font-style: italic; color: var(--sage); }
+  .page-header .intro { font-size: 1rem; color: var(--ink-muted); line-height: 1.8; }
+
+  /* PROJECT CARDS */
+  .projects-grid { padding: 4rem 5vw; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .project-card {
+    background: var(--white);
+    border: 1px solid var(--sage-pale);
+    border-radius: 1.2rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .project-card:hover { box-shadow: 0 8px 32px rgba(90,122,94,0.12); transform: translateY(-2px); }
+  .project-card.featured { grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr; }
+  .card-visual {
+    aspect-ratio: 16/9;
+    background: linear-gradient(135deg, var(--bg-card), var(--sage-pale));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3rem; color: var(--sage-light);
+    position: relative; overflow: hidden;
+  }
+  .card-visual img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center;
+    display: block;
+  }
+  .project-card.featured .card-visual { aspect-ratio: auto; min-height: 260px; }
+  .card-visual .placeholder-label {
+    position: absolute; bottom: 1rem; left: 1rem;
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--sage-mid); background: var(--white); padding: 0.3rem 0.7rem; border-radius: 1rem;
+    opacity: 0.8;
+  }
+  .card-body { padding: 1.8rem; flex: 1; display: flex; flex-direction: column; }
+  .card-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; }
+  .card-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .card-tag { font-size: 0.72rem; padding: 0.25rem 0.65rem; border-radius: 1rem; background: var(--sage-pale); color: var(--sage); font-weight: 600; }
+  .card-date { font-size: 0.75rem; color: var(--ink-faint); }
+  .card-title { font-family: 'DM Serif Display', serif; font-size: 1.4rem; font-weight: 400; margin-bottom: 0.5rem; color: var(--ink); }
+  .card-org { font-size: 0.82rem; color: var(--sage); font-weight: 600; margin-bottom: 0.8rem; }
+  .card-desc { font-size: 0.9rem; color: var(--ink-muted); line-height: 1.7; flex: 1; }
+  .card-bullets { list-style: none; margin-top: 1rem; display: flex; flex-direction: column; gap: 0.4rem; }
+  .card-bullets li { font-size: 0.88rem; color: var(--ink-muted); padding-left: 1.1rem; position: relative; line-height: 1.5; }
+  .card-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--sage-light); }
+  .card-footer { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--sage-pale); display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .card-link { font-size: 0.82rem; font-weight: 600; color: var(--sage); text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem; }
+  .card-link:hover { color: var(--ink); }
+  .card-link.placeholder { color: var(--ink-faint); cursor: default; }
+
+  /* PLACEHOLDER CARD */
+  .project-card.placeholder-card {
+    border-style: dashed;
+    background: transparent;
+    opacity: 0.5;
+  }
+  .project-card.placeholder-card .card-body { align-items: center; justify-content: center; text-align: center; min-height: 200px; }
+  .placeholder-icon { font-size: 2rem; color: var(--sage-light); margin-bottom: 0.75rem; }
+  .placeholder-text { font-size: 0.88rem; color: var(--ink-faint); }
+
+  footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,0.06); padding: 1.5rem 5vw; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: var(--ink-faint); }
+  footer a { color: var(--ink-faint); text-decoration: none; }
+  footer a:hover { color: var(--sage-light); }
+
+  @media (max-width: 768px) {
+    .page-header { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-card.featured { grid-column: span 1; grid-template-columns: 1fr; }
+    nav ul li:not(:last-child) { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Sophia Bian</a>
+  <ul>
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html" class="active">Projects</a></li>
+    <li><a href="music.html">Music</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="resume.html">Resume</a></li>
+    <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div>
+    <p class="eyebrow">Projects</p>
+    <h1>Think.<br><em>Tinker.</em><br>Test!</h1>
+  </div>
+  <div class="intro">
+    I've worked on projects ranging from Formula SAE data acquisition to medical device prototyping and embedded systems. 
+    Here are a few of them!
+  </div>
+</div>
+
+<div class="projects-grid">
+
+  <!-- FORMULA SAE — FEATURED -->
+  <div class="project-card featured">
+    <div class="card-visual">
+      <img src="formula.jpg" alt="Northwestern Formula SAE">
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <div class="card-tags">
+          <span class="card-tag">C++</span>
+          <span class="card-tag">PCB Design</span>
+          <span class="card-tag">Embedded</span>
+        </div>
+        <span class="card-date">Sept 2025 – Present</span>
+      </div>
+      <div class="card-title">Northwestern Formula SAE: Data Acquisition</div>
+      <div class="card-org">Northwestern University · Evanston, IL</div>
+      <div class="card-desc">
+        Member of the Data Acquisition subteam on Northwestern's Formula SAE race car project.
+        Working on the systems that collect, display, and interpret real-time vehicle data during testing and competition.
+      </div>
+      <ul class="card-bullets">
+        <li>Developed features for a C++-based dashboard system to display real-time vehicle telemetry</li>
+        <li>Designed and tested NeoPixel LED drivers for visual status indicators on the car</li>
+        <li>Created Version 2 of the dashboard controller PCB using Altium Designer</li>
+        <li>Collaborated across subteams using Git-based workflows</li>
+      </ul>
+      <div class="card-footer">
+        <span class="card-link placeholder">🔒 Private repo</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- WIRELESS FLUORIMETER -->
+  <div class="project-card">
+    <div class="card-visual">
+      <img src="fluorimeter.jpg" alt="Wireless Fluorimeter">
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <div class="card-tags">
+          <span class="card-tag">Research</span>
+          <span class="card-tag">Bioelectronics</span>
+          <span class="card-tag">Hardware</span>
+        </div>
+        <span class="card-date">2026 – Present</span>
+      </div>
+      <div class="card-title">Wireless Fluorimeter Development</div>
+      <div class="card-org">Querrey Simpson Institute for Bioelectronics, Northwestern University</div>
+      <div class="card-desc">
+        Undergraduate research assistant working under Dr. Taewan Park on a portable wireless
+        fluorimeter for continuous fluorescence monitoring in biomedical applications.
+      </div>
+      <ul class="card-bullets">
+        <li>Assembled flexible PCB-based prototypes through surface-mount soldering and hardware integration</li>
+        <li>Performed validation and functional testing of sensing, power, and Bluetooth communication systems</li>
+        <li>Supported debugging and iterative refinement of prototype hardware</li>
+        <li>Contributed to the development of a compact fluorescence sensing platform for biomedical research</li>
+      </ul>
+      <div class="card-footer">
+        <span class="card-link placeholder">🔬 Ongoing research</span>
+      </div>
+    </div>
+  </div>  
+
+  <!-- FIRST ROBOTICS -->
+  <div class="project-card">
+    <div class="card-visual">
+      <img src="robotics.jpg" alt="FIRST Robotics Team 1868">
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <div class="card-tags">
+          <span class="card-tag">Electrical</span>
+          <span class="card-tag">CAD</span>
+          <span class="card-tag">Fabrication</span>
+        </div>
+        <span class="card-date">Aug 2022 – Feb 2025</span>
+      </div>
+      <div class="card-title">FIRST Robotics Team #1868</div>
+      <div class="card-org">NASA Ames Research Center, Mountain View, CA</div>
+      <div class="card-desc">
+        Led the electrical subteam for a competitive FIRST Robotics team, designing and building
+        full robot systems from scratch on an 8-week competition build cycle.
+      </div>
+      <ul class="card-bullets">
+        <li>Led electrical system architecture; delivered competition-ready robots on tight deadlines</li>
+        <li>Designed chassis layouts and mechanical subsystems using top-down CAD modeling</li>
+        <li>Executed wiring, machining, fabrication, and full subsystem integration</li>
+        <li>Mentored teammates in CAD, electronics, and manufacturing — qualified to FIRST World Championships twice</li>
+      </ul>
+      <div class="card-footer">
+      </div>
+    </div>
+  </div>
+
+  <!-- RESONANCE -->
+  <div class="project-card">
+    <div class="card-visual" style="background: linear-gradient(135deg, #2b2438 0%, #4a3b63 100%); font-size: 3rem;">
+      🎻
+      <span class="placeholder-label">Add photo → resonance.jpg</span>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <div class="card-tags">
+          <span class="card-tag">Embedded</span>
+          <span class="card-tag">Sensors</span>
+          <span class="card-tag">Web App</span>
+        </div>
+        <span class="card-date">2025</span>
+      </div>
+      <div class="card-title">Resonance: Violin Orientation Monitoring System</div>
+      <div class="card-org">Segal Design Institute, Northwestern University</div>
+      <div class="card-desc">
+        Designed and developed an embedded sensing system that monitors violin orientation in real time using an IMU, microcontroller, and browser-based interface.
+      </div>
+      <ul class="card-bullets">
+        <li>Integrated an Adafruit Feather RP2040 microcontroller with a 9-DoF IMU sensor for real-time motion tracking</li>
+        <li>Designed and fabricated a custom 3D-printed housing compatible with standard violin shoulder rests</li>
+        <li>Developed a browser-based dashboard to visualize orientation data and support user testing</li>
+        <li>Conducted prototyping, iterative testing, and user-centered design evaluation throughout development</li>
+      </ul>
+      <div class="card-footer">
+        <span class="card-link placeholder">📸 Photos coming soon</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPICALIGN -->
+  <div class="project-card">
+    <div class="card-visual" style="background: linear-gradient(135deg, #2a1e3a 0%, #3d2952 100%); font-size: 3rem;">
+      🏥
+      <span class="placeholder-label">Add photo → spicalign.jpg</span>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <div class="card-tags">
+          <span class="card-tag">Mechanical</span>
+          <span class="card-tag">Medical Device</span>
+          <span class="card-tag">Prototyping</span>
+        </div>
+        <span class="card-date">Sept – Dec 2025</span>
+      </div>
+      <div class="card-title">SPICALIGN: Pediatric Medical Device</div>
+      <div class="card-org">Segal Design Institute, Northwestern University & Lurie Children's Hospital</div>
+      <div class="card-desc">
+        Designed and prototyped an intraoperative device to correctly position pediatric hip spica
+        casts for car-seat compatibility, in collaboration with Lurie Children's Hospital.
+      </div>
+      <ul class="card-bullets">
+        <li>Built a compact mechanical system using a linear actuator, servos, telescoping arms, and foot-pedal control</li>
+        <li>Conducted user interviews with pediatric nurses and car-seat technicians to define requirements</li>
+        <li>Collaborated with Lurie Children's Hospital on prototyping, testing, and documentation</li>
+      </ul>
+      <div class="card-footer">
+        <span class="card-link placeholder">📸 Photos coming soon</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLACEHOLDER -->
+  <div class="project-card placeholder-card">
+    <div class="card-body">
+      <div class="placeholder-icon">＋</div>
+      <div class="placeholder-text">More projects coming soon</div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span>© 2026 Sophia Bian</span>
+  <a href="index.html">← Back to home</a>
+</footer>
+
+</body>
+</html>

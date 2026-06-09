@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resume — Sophia Bian</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f2f5f0; --bg-card: #e8ede5; --sage: #5a7a5e; --sage-mid: #7a9e7e;
+    --sage-light: #aec5b0; --sage-pale: #d4e2d6; --ink: #1c2b1e;
+    --ink-muted: #5a6b5c; --ink-faint: #94a896; --white: #fafcf9;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--ink); font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.6; }
+
+  nav {
+    position: sticky; top: 0; z-index: 100; background: var(--bg);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.4rem 5vw; border-bottom: 1px solid var(--sage-pale);
+  }
+  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--ink); text-decoration: none; }
+  nav ul { list-style: none; display: flex; gap: 2rem; align-items: center; }
+  nav ul a { color: var(--ink-muted); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: color 0.2s; }
+  nav ul a:hover, nav ul a.active { color: var(--sage); }
+  .nav-cta { background: var(--sage) !important; color: var(--white) !important; padding: 0.55rem 1.4rem; border-radius: 2rem; font-weight: 600 !important; }
+  .nav-cta:hover { background: var(--ink) !important; }
+
+  /* HEADER BAR */
+  .resume-header {
+    padding: 3.5rem 5vw 2.5rem;
+    border-bottom: 1px solid var(--sage-pale);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  .resume-header-left .eyebrow { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--sage-mid); margin-bottom: 0.75rem; }
+  .resume-header-left h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 400; line-height: 1.1; }
+  .resume-header-left h1 em { font-style: italic; color: var(--sage); }
+  .resume-header-left p { font-size: 0.9rem; color: var(--ink-muted); margin-top: 0.5rem; }
+
+  .download-group { display: flex; flex-direction: column; gap: 0.6rem; align-items: flex-end; }
+  .download-btn {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    padding: 0.85rem 1.8rem; border-radius: 2rem;
+    font-size: 0.88rem; font-weight: 600; text-decoration: none; transition: all 0.2s;
+  }
+  .download-btn-primary { background: var(--sage); color: var(--white); }
+  .download-btn-primary:hover { background: var(--ink); }
+  .download-btn-outline { border: 1.5px solid var(--sage-light); color: var(--sage); }
+  .download-btn-outline:hover { background: var(--sage-pale); border-color: var(--sage); }
+
+  /* TAB SWITCHER */
+  .tab-bar {
+    padding: 0 5vw;
+    border-bottom: 1px solid var(--sage-pale);
+    display: flex; gap: 0;
+  }
+  .tab-btn {
+    padding: 1rem 1.5rem; font-size: 0.85rem; font-weight: 600;
+    color: var(--ink-faint); background: none; border: none;
+    border-bottom: 2.5px solid transparent; cursor: pointer;
+    transition: all 0.2s; margin-bottom: -1px;
+  }
+  .tab-btn:hover { color: var(--sage); }
+  .tab-btn.active { color: var(--sage); border-bottom-color: var(--sage); }
+
+  /* PDF VIEWER */
+  .pdf-pane { display: none; padding: 2.5rem 5vw; }
+  .pdf-pane.active { display: block; }
+  .pdf-frame-wrap {
+    background: var(--white);
+    border: 1px solid var(--sage-pale);
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(90,122,94,0.08);
+  }
+  .pdf-frame-wrap iframe {
+    width: 100%; height: 80vh; display: block; border: none;
+  }
+  .pdf-missing {
+    padding: 5rem 2rem; text-align: center;
+    color: var(--ink-faint);
+  }
+  .pdf-missing .icon { font-size: 3rem; margin-bottom: 1rem; opacity: 0.4; }
+  .pdf-missing h3 { font-size: 1rem; font-weight: 600; color: var(--ink-muted); margin-bottom: 0.5rem; }
+  .pdf-missing p { font-size: 0.85rem; line-height: 1.7; }
+  .pdf-missing code { font-family: monospace; background: var(--sage-pale); color: var(--sage); padding: 0.2rem 0.5rem; border-radius: 0.3rem; font-size: 0.82rem; }
+
+  footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,0.06); padding: 1.5rem 5vw; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: var(--ink-faint); }
+  footer a { color: var(--ink-faint); text-decoration: none; }
+  footer a:hover { color: var(--sage-light); }
+
+  @media (max-width: 600px) {
+    .resume-header { flex-direction: column; align-items: flex-start; }
+    .download-group { align-items: flex-start; }
+    nav ul li:not(:last-child) { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Sophia Bian</a>
+  <ul>
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="music.html">Music</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="resume.html" class="active">Resume</a></li>
+    <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="resume-header">
+  <div class="resume-header-left" style="display:flex; gap:2rem; align-items:center;">
+    <!-- Headshot -->
+    <div class="headshot-wrap">
+      <img src="headshot.JPG" alt="Sophia Bian"
+           style="width:140px; height:140px; border-radius:50%; object-fit:cover; object-position:center 20%; border:3px solid var(--sage-pale); display:block;">
+    </div>
+    <div>
+      <p class="eyebrow">Resume</p>
+      <h1>Sophia Bian —<br><em>Résumé</em></h1>
+      <p>Northwestern University · BS Electrical Engineering · Class of 2029</p>
+    </div>
+  </div>
+  <div class="download-group">
+    <a href="resume-engineering.pdf" download class="download-btn download-btn-primary">
+      ↓ Download Engineering Resume
+    </a>
+  </div>
+</div>
+
+<!-- TAB BAR -->
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('engineering', this)">Engineering</button>
+  <button class="tab-btn" onclick="switchTab('music', this)">Music</button>
+</div>
+
+<!-- ENGINEERING RESUME PANE -->
+<div class="pdf-pane active" id="pane-engineering">
+  <div class="pdf-frame-wrap">
+    <iframe src="resume-engineering.pdf"
+            title="Engineering Resume"
+            onerror="showMissing(this, 'engineering')">
+    </iframe>
+  </div>
+  <!-- Shown if PDF is missing -->
+  <div class="pdf-missing" id="missing-engineering" style="display:none">
+    <div class="icon">📄</div>
+    <h3>Resume not found</h3>
+    <p>
+      Save your engineering resume as <code>resume-engineering.pdf</code><br>
+      inside the <code>portfolio/</code> folder and it will appear here.
+    </p>
+  </div>
+</div>
+
+<!-- MUSIC RESUME PANE -->
+<div class="pdf-pane" id="pane-music">
+  <div class="pdf-frame-wrap">
+    <iframe src="resume-music.pdf"
+            title="Music Resume"
+            onerror="showMissing(this, 'music')">
+    </iframe>
+  </div>
+  <div class="pdf-missing" id="missing-music" style="display:none">
+    <div class="icon">🎼</div>
+    <h3>Resume not found</h3>
+    <p>
+      Save your music resume as <code>resume-music.pdf</code><br>
+      inside the <code>portfolio/</code> folder and it will appear here.
+    </p>
+  </div>
+</div>
+
+<footer>
+  <span>© 2026 Sophia Bian</span>
+  <a href="index.html">← Back to home</a>
+</footer>
+
+<script>
+  function switchTab(name, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.pdf-pane').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('pane-' + name).classList.add('active');
+  }
+
+  // Check if PDFs load; show missing message if not
+  window.addEventListener('load', () => {
+    ['engineering', 'music'].forEach(type => {
+      const iframe = document.querySelector(`#pane-${type} iframe`);
+      if (!iframe) return;
+      // Try to detect a failed load (works for same-origin)
+      iframe.addEventListener('error', () => showMissing(iframe, type));
+      // Also check after short delay for browsers that don't fire error on 404
+      setTimeout(() => {
+        try {
+          if (iframe.contentDocument && iframe.contentDocument.body &&
+              iframe.contentDocument.body.innerText.includes('404')) {
+            showMissing(iframe, type);
+          }
+        } catch(e) {}
+      }, 1000);
+    });
+  });
+
+  function showMissing(iframe, type) {
+    if (iframe && iframe.parentElement) iframe.parentElement.style.display = 'none';
+    const msg = document.getElementById('missing-' + type);
+    if (msg) msg.style.display = 'block';
+  }
+</script>
+</body>
+</html>

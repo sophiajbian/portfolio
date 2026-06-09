@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery — Sophia Bian</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f2f5f0; --bg-card: #e8ede5; --sage: #5a7a5e; --sage-mid: #7a9e7e;
+    --sage-light: #aec5b0; --sage-pale: #d4e2d6; --ink: #1c2b1e;
+    --ink-muted: #5a6b5c; --ink-faint: #94a896; --white: #fafcf9;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--ink); font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.6; }
+
+  nav {
+    position: sticky; top: 0; z-index: 100; background: var(--bg);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.4rem 5vw; border-bottom: 1px solid var(--sage-pale);
+  }
+  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--ink); text-decoration: none; }
+  nav ul { list-style: none; display: flex; gap: 2rem; align-items: center; }
+  nav ul a { color: var(--ink-muted); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: color 0.2s; }
+  nav ul a:hover, nav ul a.active { color: var(--sage); }
+  .nav-cta { background: var(--sage) !important; color: var(--white) !important; padding: 0.55rem 1.4rem; border-radius: 2rem; font-weight: 600 !important; }
+  .nav-cta:hover { background: var(--ink) !important; }
+
+  /* PAGE HEADER */
+  .page-header {
+    padding: 5rem 5vw 3rem; border-bottom: 1px solid var(--sage-pale);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end;
+  }
+  .eyebrow { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--sage-mid); margin-bottom: 1rem; }
+  .page-header h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.5rem, 4vw, 3.8rem); font-weight: 400; line-height: 1.1; }
+  .page-header h1 em { font-style: italic; color: var(--sage); }
+  .page-header .intro { font-size: 1rem; color: var(--ink-muted); line-height: 1.8; }
+
+  /* FILTER TABS */
+  .filter-bar {
+    padding: 2rem 5vw 0;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--sage-pale);
+  }
+  .filter-btn {
+    padding: 0.55rem 1.2rem;
+    border-radius: 2rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1.5px solid var(--sage-pale);
+    background: transparent;
+    color: var(--ink-muted);
+    transition: all 0.2s;
+    margin-bottom: -1px;
+  }
+  .filter-btn:hover { border-color: var(--sage-light); color: var(--sage); }
+  .filter-btn.active { background: var(--sage); color: var(--white); border-color: var(--sage); }
+
+  /* MASONRY GALLERY */
+  .gallery-section { padding: 3rem 5vw 5rem; }
+  .gallery-section-title {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink-faint); margin-bottom: 1.5rem; padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--sage-pale);
+  }
+
+  .masonry {
+    columns: 3;
+    column-gap: 1rem;
+  }
+  .photo-item {
+    break-inside: avoid;
+    margin-bottom: 1rem;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    background: var(--bg-card);
+  }
+  .photo-item img {
+    width: 100%;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+  .photo-item:hover img { transform: scale(1.04); }
+  .photo-item .overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(28,43,30,0.7) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: flex; align-items: flex-end; padding: 1.2rem;
+  }
+  .photo-item:hover .overlay { opacity: 1; }
+  .overlay-text { color: var(--white); }
+  .overlay-text .caption { font-size: 0.88rem; font-weight: 600; }
+  .overlay-text .sub { font-size: 0.75rem; color: var(--sage-light); margin-top: 0.15rem; }
+
+  /* PLACEHOLDER PHOTO SLOTS */
+  .photo-placeholder {
+    break-inside: avoid;
+    margin-bottom: 1rem;
+    border-radius: 0.75rem;
+    border: 2px dashed var(--sage-pale);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.5rem; color: var(--ink-faint); font-size: 0.78rem; text-align: center;
+    padding: 2rem 1rem;
+    min-height: 180px;
+  }
+  .photo-placeholder .ph-icon { font-size: 1.8rem; opacity: 0.35; }
+  .photo-placeholder code {
+    font-family: monospace; font-size: 0.72rem;
+    background: var(--sage-pale); color: var(--sage);
+    padding: 0.2rem 0.5rem; border-radius: 0.3rem;
+  }
+
+  /* LIGHTBOX */
+  .lightbox {
+    display: none; position: fixed; inset: 0; z-index: 999;
+    background: rgba(10,18,11,0.92); align-items: center; justify-content: center;
+    padding: 2rem;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox-inner { position: relative; max-width: 90vw; max-height: 90vh; }
+  .lightbox-inner img { max-width: 100%; max-height: 85vh; border-radius: 0.5rem; display: block; }
+  .lightbox-caption { color: var(--sage-light); font-size: 0.85rem; margin-top: 0.75rem; text-align: center; }
+  .lightbox-close {
+    position: absolute; top: -1.5rem; right: -1.5rem;
+    background: rgba(255,255,255,0.1); border: none; color: var(--white);
+    width: 2rem; height: 2rem; border-radius: 50%; cursor: pointer;
+    font-size: 1rem; display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  .lightbox-close:hover { background: rgba(255,255,255,0.2); }
+
+  /* HOW TO ADD PHOTOS */
+  .how-to {
+    margin: 0 5vw 5rem;
+    background: var(--white);
+    border: 1px solid var(--sage-pale);
+    border-radius: 1rem;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+  .how-to-icon { font-size: 2rem; }
+  .how-to h3 { font-size: 0.88rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .how-to ol { padding-left: 1.2rem; font-size: 0.85rem; color: var(--ink-muted); line-height: 1.9; }
+  .how-to code { font-family: monospace; background: var(--sage-pale); color: var(--sage); padding: 0.15rem 0.4rem; border-radius: 0.3rem; font-size: 0.8rem; }
+
+  footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,0.06); padding: 1.5rem 5vw; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: var(--ink-faint); }
+  footer a { color: var(--ink-faint); text-decoration: none; }
+  footer a:hover { color: var(--sage-light); }
+
+  @media (max-width: 900px) { .masonry { columns: 2; } }
+  @media (max-width: 600px) {
+    .masonry { columns: 1; }
+    .page-header { grid-template-columns: 1fr; }
+    nav ul li:not(:last-child) { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Sophia Bian</a>
+  <ul>
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="music.html">Music</a></li>
+    <li><a href="gallery.html" class="active">Gallery</a></li>
+    <li><a href="resume.html">Resume</a></li>
+    <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div>
+    <p class="eyebrow">Gallery</p>
+    <h1>A collection <br>of </em>photos</em></h1>
+  </div>
+  <div class="intro">
+    A collection of photos from performances, engineering projects, and everything in between.
+    Drop your images into the <code style="font-family:monospace; background:var(--sage-pale); color:var(--sage); padding:0.15rem 0.4rem; border-radius:0.3rem; font-size:0.88rem;">gallery/</code> folder and they'll appear here automatically.
+  </div>
+</div>
+
+<!-- MUSIC SECTION -->
+<section class="gallery-section">
+  <p class="gallery-section-title">Music &amp; Miscellaneous</p>
+  <div class="masonry" id="music-grid">
+
+    <div class="photo-item" onclick="openLightbox('suzhou1.JPG', 'Suzhou')">
+      <img src="suzhou1.JPG" alt="Suzhou">
+      <div class="overlay"><div class="overlay-text"><div class="caption">Suzhou</div></div></div>
+    </div>
+
+    <div class="photo-item" onclick="openLightbox('suzhou2.JPG.jpeg', 'Suzhou')">
+      <img src="suzhou2.JPG.jpeg" alt="Suzhou">
+      <div class="overlay"><div class="overlay-text"><div class="caption">Suzhou</div></div></div>
+    </div>
+
+    <div class="photo-item" onclick="openLightbox('suzhou3.JPG', 'Suzhou')">
+      <img src="suzhou3.JPG" alt="Suzhou">
+      <div class="overlay"><div class="overlay-text"><div class="caption">Suzhou</div></div></div>
+    </div>
+
+    <div class="photo-item" onclick="openLightbox('windens1.JPG', 'Gunn Wind Ensemble')">
+      <img src="windens1.JPG" alt="Gunn Wind Ensemble">
+      <div class="overlay"><div class="overlay-text"><div class="caption">Gunn Wind Ensemble</div></div></div>
+    </div>
+
+    <div class="photo-item" onclick="openLightbox('sfsyo1.JPG', 'San Francisco Symphony Youth Orchestra')">
+      <img src="sfsyo1.JPG" alt="SFSYO">
+      <div class="overlay"><div class="overlay-text"><div class="caption">SF Symphony Youth Orchestra</div></div></div>
+    </div>
+
+    <div class="photo-item" onclick="openLightbox('sfsyo2.JPG', 'San Francisco Symphony Youth Orchestra')">
+      <img src="sfsyo2.JPG" alt="SFSYO">
+      <div class="overlay"><div class="overlay-text"><div class="caption">SF Symphony Youth Orchestra</div></div></div>
+    </div>
+
+    <div class="photo-item" onclick="openLightbox('sfsyo3.jpeg', 'San Francisco Symphony Youth Orchestra')">
+      <img src="sfsyo3.jpeg" alt="SFSYO">
+      <div class="overlay"><div class="overlay-text"><div class="caption">SF Symphony Youth Orchestra</div></div></div>
+    </div>
+
+    <div class="photo-item" onclick="openLightbox('sfsyo6.JPG', 'San Francisco Symphony Youth Orchestra')">
+      <img src="sfsyo6.JPG" alt="SFSYO">
+      <div class="overlay"><div class="overlay-text"><div class="caption">SF Symphony Youth Orchestra</div></div></div>
+    </div>
+
+    <div class="photo-item" onclick="openLightbox('sfsyo7.jpeg', 'San Francisco Symphony Youth Orchestra')">
+      <img src="sfsyo7.jpeg" alt="SFSYO">
+      <div class="overlay"><div class="overlay-text"><div class="caption">SF Symphony Youth Orchestra</div></div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ENGINEERING SECTION -->
+<section class="gallery-section" style="padding-top:0">
+  <p class="gallery-section-title">Engineering &amp; Projects</p>
+  <div class="masonry" id="eng-grid">
+
+    <div class="photo-item" onclick="openLightbox('formula.jpg', 'Northwestern Formula SAE')">
+      <img src="formula.jpg" alt="Formula SAE">
+      <div class="overlay"><div class="overlay-text"><div class="caption">Formula SAE</div><div class="sub">Northwestern University</div></div></div>
+    </div>
+
+    <div class="photo-item" onclick="openLightbox('robotics.jpg', 'FIRST Robotics Team 1868')">
+      <img src="robotics.jpg" alt="FIRST Robotics">
+      <div class="overlay"><div class="overlay-text"><div class="caption">FIRST Robotics · Team 1868</div></div></div>
+    </div>
+
+    <div class="photo-item" onclick="openLightbox('fluorimeter.jpg', 'Fluorimeter project')">
+      <img src="fluorimeter.jpg" alt="Fluorimeter">
+      <div class="overlay"><div class="overlay-text"><div class="caption">Fluorimeter</div></div></div>
+    </div>
+
+    <div class="photo-placeholder" style="min-height:220px">
+      <span class="ph-icon">➕</span>
+      <span>More coming soon</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- HOW TO ADD PHOTOS -->
+<div class="how-to">
+  <div class="how-to-icon">📸</div>
+  <div>
+    <h3>How to add your photos</h3>
+    <ol>
+      <li>Create a folder called <code>gallery/</code> inside your <code>portfolio/</code> folder</li>
+      <li>Drop your photos in — name them to match the <code>code</code> labels above (e.g. <code>gallery/sfsyo.jpg</code>)</li>
+      <li>Replace each <code>&lt;div class="photo-placeholder"&gt;</code> block in this file with a <code>&lt;div class="photo-item"&gt;</code> block (see any existing photo-item above as a template)</li>
+      <li>Update the caption and subtitle text to match your photo</li>
+    </ol>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <img id="lightbox-img" src="" alt="">
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
+</div>
+
+<footer>
+  <span>© 2026 Sophia Bian</span>
+  <a href="index.html">← Back to home</a>
+</footer>
+
+<script>
+  // Hide headshot placeholder once real image loads
+  const headshotImg = document.querySelector('.photo-item img[src="headshot.jpg"]');
+  if (headshotImg) {
+    headshotImg.addEventListener('load', () => {
+      const ph = document.getElementById('headshot-placeholder');
+      if (ph) ph.style.display = 'none';
+    });
+  }
+
+  function openLightbox(src, caption) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox-caption').textContent = caption;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox(e) {
+    if (!e || e.target === document.getElementById('lightbox') || e.target.classList.contains('lightbox-close')) {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
+</body>
+</html>

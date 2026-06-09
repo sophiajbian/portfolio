@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Sophia Bian</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f2f5f0; --bg-card: #e8ede5; --sage: #5a7a5e; --sage-mid: #7a9e7e;
+    --sage-light: #aec5b0; --sage-pale: #d4e2d6; --ink: #1c2b1e;
+    --ink-muted: #5a6b5c; --ink-faint: #94a896; --white: #fafcf9;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--ink); font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.6; }
+
+  nav {
+    position: sticky; top: 0; z-index: 100; background: var(--bg);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.4rem 5vw; border-bottom: 1px solid var(--sage-pale);
+  }
+  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--ink); text-decoration: none; }
+  nav ul { list-style: none; display: flex; gap: 1.5rem; align-items: center; }
+  nav ul a { color: var(--ink-muted); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: color 0.2s; }
+  nav ul a:hover, nav ul a.active { color: var(--sage); }
+  .nav-cta { background: var(--sage) !important; color: var(--white) !important; padding: 0.55rem 1.4rem; border-radius: 2rem; font-weight: 600 !important; }
+  .nav-cta:hover { background: var(--ink) !important; }
+
+  /* PAGE HEADER */
+  .page-header {
+    padding: 5rem 5vw 3rem;
+    border-bottom: 1px solid var(--sage-pale);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: end;
+  }
+  .page-header .eyebrow { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--sage-mid); margin-bottom: 1rem; }
+  .page-header h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.5rem, 4vw, 3.8rem); font-weight: 400; line-height: 1.1; }
+  .page-header h1 em { font-style: italic; color: var(--sage); }
+  .page-header .intro { font-size: 1rem; color: var(--ink-muted); line-height: 1.8; }
+
+  /* SECTIONS */
+  .content-section { padding: 4rem 5vw; border-bottom: 1px solid var(--sage-pale); }
+  .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 2rem; }
+
+  /* EDUCATION */
+  .edu-card {
+    background: var(--white);
+    border: 1px solid var(--sage-pale);
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-bottom: 1rem;
+  }
+  .edu-card:last-child { margin-bottom: 0; }
+  .edu-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem; }
+  .edu-school { font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--ink); }
+  .edu-date { font-size: 0.8rem; color: var(--ink-faint); font-weight: 500; white-space: nowrap; }
+  .edu-degree { font-size: 0.9rem; color: var(--sage); font-weight: 600; margin-bottom: 0.4rem; }
+  .edu-location { font-size: 0.82rem; color: var(--ink-faint); margin-bottom: 0.8rem; }
+  .edu-badge { display: inline-block; background: var(--sage-pale); color: var(--sage); font-size: 0.75rem; font-weight: 600; padding: 0.3rem 0.8rem; border-radius: 2rem; margin-bottom: 0.8rem; }
+  .edu-courses { font-size: 0.82rem; color: var(--ink-muted); line-height: 1.7; }
+  .edu-courses strong { color: var(--ink-faint); font-weight: 600; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; display: block; margin-bottom: 0.3rem; }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .skill-group { background: var(--white); border: 1px solid var(--sage-pale); border-radius: 1rem; padding: 1.5rem; }
+  .skill-group h3 { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage-mid); margin-bottom: 1rem; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .skill-tag { padding: 0.35rem 0.8rem; border-radius: 2rem; font-size: 0.78rem; font-weight: 500; background: var(--sage-pale); color: var(--sage); border: 1px solid var(--sage-light); }
+
+  /* EXPERIENCE */
+  .exp-item { padding: 2rem 0; border-bottom: 1px solid var(--bg-card); }
+  .exp-item:last-child { border-bottom: none; }
+  .exp-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.3rem; }
+  .exp-title { font-family: 'DM Serif Display', serif; font-size: 1.15rem; }
+  .exp-date { font-size: 0.8rem; color: var(--ink-faint); font-weight: 500; white-space: nowrap; }
+  .exp-role { font-size: 0.88rem; color: var(--sage); font-weight: 600; margin-bottom: 0.3rem; }
+  .exp-org { font-size: 0.82rem; color: var(--ink-faint); margin-bottom: 1rem; }
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .exp-bullets li { font-size: 0.92rem; color: var(--ink-muted); padding-left: 1.2rem; position: relative; line-height: 1.6; }
+  .exp-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--sage-light); }
+
+  /* FOOTER */
+  footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,0.06); padding: 1.5rem 5vw; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: var(--ink-faint); }
+  footer a { color: var(--ink-faint); text-decoration: none; }
+  footer a:hover { color: var(--sage-light); }
+
+  @media (max-width: 768px) {
+    .page-header { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr; }
+    nav ul li:not(:last-child) { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Sophia Bian</a>
+  <ul>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="music.html">Music</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="resume.html">Resume</a></li>
+    <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div>
+    <p class="eyebrow">About Me</p>
+    <h1>Engineer,<br><em>Musician,</em><br>Explorer</h1>
+  </div>
+  <div class="intro">
+  I'm Sophia, a rising second-year student at Northwestern University
+  pursuing Electrical Engineering.
+
+  I'm interested in embedded systems, software, and the aerospace industry,
+  and enjoy building things that connect hardware with software.
+
+  Outside my classes, I'm a member of Northwestern Formula Racing,
+  where I work on data acquisition systems for the team's Formula SAE car.
+  </div>
+</div>
+
+<!-- EDUCATION -->
+<section class="content-section">
+  <p class="section-label">Education</p>
+
+  <div class="edu-card">
+    <div class="edu-header">
+      <span class="edu-school">Northwestern University</span>
+      <span class="edu-date">Expected June 2029</span>
+    </div>
+    <div class="edu-degree">B.S. Electrical Engineering</div>
+    <div class="edu-location">Evanston, IL</div>
+    <span class="edu-badge">Engineering Dean's Honors List</span>
+    <div class="edu-courses">
+      <strong>Relevant Coursework</strong>
+    Computer Engineering Design · Introduction to Computer Engineering · Introduction to Electrical Engineering ·
+    Object-Oriented Programming · Fundamentals of Computer Science · Physics: Mechanics · Multi-Variable Calculus ·
+    Linear Algebra · Design Thinking &amp; Communication
+    </div>
+  </div>
+
+  <div class="edu-card">
+    <div class="edu-header">
+      <span class="edu-school">Henry M. Gunn High School</span>
+      <span class="edu-date">June 2025</span>
+    </div>
+    <div class="edu-degree">High School Diploma</div>
+    <div class="edu-location">Palo Alto, CA</div>
+    <div class="edu-courses">
+      <strong>Relevant Coursework</strong>
+      Principles of Engineering Design &amp; Robotics · Digital Electronics · Physics Mechanics ·
+      Physics E&amp;M · Single-Variable Calculus · Linear Algebra · Biology · Chemistry
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="content-section">
+  <p class="section-label">Skills</p>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <h3>Technical</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">MATLAB</span>
+        <span class="skill-tag">C++</span>
+        <span class="skill-tag">SOLIDWORKS</span>
+        <span class="skill-tag">Fusion 360</span>
+        <span class="skill-tag">OnShape</span>
+        <span class="skill-tag">Altium Designer</span>
+        <span class="skill-tag">NI Multisim</span>
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">Soldering</span>
+        <span class="skill-tag">Machining</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Soft Skills</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Technical Documentation</span>
+        <span class="skill-tag">Collaboration</span>
+        <span class="skill-tag">Problem Solving</span>
+        <span class="skill-tag">Project Management</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Languages</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">English</span>
+        <span class="skill-tag">Chinese — Intermediate</span>
+        <span class="skill-tag">Japanese — Elementary</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- EXPERIENCE -->
+
+<!-- 
+<section class="content-section">
+  <p class="section-label">Experience</p>
+
+  <div class="exp-item">
+    <div class="exp-header">
+      <span class="exp-title">Northwestern Formula SAE</span>
+      <span class="exp-date">Sept 2025 – Present</span>
+    </div>
+    <div class="exp-role">Data Acquisition Subteam Member</div>
+    <div class="exp-org">Northwestern University · Evanston, IL</div>
+    <ul class="exp-bullets">
+      <li>Developed features for a C++-based dashboard system to display real-time vehicle data</li>
+      <li>Designed and tested NeoPixel drivers for visual status indicators</li>
+      <li>Created Version 2 of a dashboard controller PCB using Altium Designer</li>
+      <li>Collaborated in a team using Git-based workflows</li>
+    </ul>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-header">
+      <span class="exp-title">FIRST Robotics Competition Team #1868</span>
+      <span class="exp-date">Aug 2022 – Feb 2025</span>
+    </div>
+    <div class="exp-role">Electrical Subteam Lead &amp; Mechanical Subteam Member</div>
+    <div class="exp-org">NASA Ames Research Center · Mountain View, CA</div>
+    <ul class="exp-bullets">
+      <li>Led electrical system architecture for a FIRST Robotics team, delivering competition-ready robots on an 8-week build cycle</li>
+      <li>Designed complete system architectures using top-down CAD modeling, specifying chassis layouts, custom mechanical subsystems, and electrical component positioning</li>
+      <li>Executed wiring, machining, fabrication, and full subsystem integration across mechanical and software interfaces</li>
+      <li>Mentored team members in CAD, electronics, and manufacturing; supported two qualifications to the FIRST World Championships</li>
+    </ul>
+  </div>
+</section>
+
+-->
+
+<footer>
+  <span>© 2026 Sophia Bian</span>
+  <a href="index.html">← Back to home</a>
+</footer>
+
+</body>
+</html>
